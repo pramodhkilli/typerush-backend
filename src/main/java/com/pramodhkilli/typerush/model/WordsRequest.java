@@ -4,6 +4,7 @@ public class WordsRequest {
     private String targetString; // optional
     private int minLength = 0;
     private int maxLength = 0;
+    private boolean caps;
 
     public int getCount() {
         return count;
@@ -35,5 +36,13 @@ public class WordsRequest {
 
     public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;
+    }
+
+    public boolean isCaps() {
+        return caps;
+    }
+
+    public void setCaps(boolean caps) {
+        this.caps = caps;
     }
 }

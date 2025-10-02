@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -40,7 +38,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<String> generateWords(int count, Character targetLetter, int minLength, int maxLength) {
+    public List<String> generateWords(int count, Character targetLetter, int minLength, int maxLength, boolean caps) {
         List<String> filtered = wordList.stream()
                 .filter(w -> minLength <= 0 || w.length() >= minLength)
                 .filter(w -> maxLength <= 0 || w.length() <= maxLength)
@@ -66,6 +64,10 @@ public class WordServiceImpl implements WordService {
         // Return exactly 'count' words (or less if not enough words available)
         return weighted.stream()
                 .limit(count)
+                .map(word -> {
+                    if (!caps) return word.toLowerCase();
+                    return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                })
                 .collect(Collectors.toList());
     }
 

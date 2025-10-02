@@ -13,7 +13,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/words/**").permitAll() // allow word API without auth
+                        .requestMatchers("/**").permitAll() // allow word API without auth
                         .anyRequest().authenticated()
                 );
         return http.build();

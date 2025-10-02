@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/words")
+@RequestMapping("/typerush/words")
 @CrossOrigin(origins = "http://localhost:3000")
 public class WordController {
 
@@ -39,7 +39,8 @@ public class WordController {
                 request.getCount(),
                 targetChar,
                 request.getMinLength(),
-                request.getMaxLength()
+                request.getMaxLength(),
+                request.isCaps()
         );
         return new WordsResponse(words);
     }
